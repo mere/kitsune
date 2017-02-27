@@ -1,0 +1,49 @@
+<?js
+  var defaultCssFiles = [
+    'styles/prettify-tomorrow.css',
+    'styles/jsdoc-default.css'
+  ]
+
+  var defaultJsFiles = [
+    'scripts/prettify/prettify.js',
+    'scripts/prettify/lang-css.js'
+  ]
+
+ /**
+  *  CSS includes
+  */
+  var cssFiles = env.conf.templates
+  && env.conf.templates.default
+  && env.conf.templates.default.cssFiles
+  && env.conf.templates.default.cssFiles.include || []
+
+  var cssExcludes = env.conf.templates
+  && env.conf.templates.default
+  && env.conf.templates.default.cssFiles
+  && env.conf.templates.default.cssFiles.exclude || []
+
+  defaultCssFiles
+    .concat(cssFiles)
+    .filter(path=>!cssExcludes.filter(f=>f===path).length)
+    .forEach(path=>{?><link type="text/css" rel="stylesheet" href="<?js= path ?>">
+    <?js})
+
+  /**
+   * Javascript includes
+   */
+  var jsFiles = env.conf.templates
+  && env.conf.templates.default
+  && env.conf.templates.default.jsFiles
+  && env.conf.templates.default.jsFiles.include || []
+
+  var jsExcludes = env.conf.templates
+  && env.conf.templates.default
+  && env.conf.templates.default.jsFiles
+  && env.conf.templates.default.jsFiles.exclude || []
+
+  defaultJsFiles
+    .concat(jsFiles)
+    .filter(path=>!jsExcludes.filter(f=>f===path).length)
+    .forEach(path=>{?><script src="<?js= path ?>"></script>
+    <?js})
+?>

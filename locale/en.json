@@ -1,0 +1,19 @@
+{
+  "home": "Home",
+  "classes": "Classes",
+  "modules": "Modules",
+  "externals": "Externals",
+  "events": "Events",
+  "namespaces": "Namespaces",
+  "mixins": "Mixins",
+  "tutorials": "Tutorials",
+  "interfaces": "Interfaces",
+  "global": "global",
+  "methods": "Methods",
+  "parameters": "Parameters",
+  "type_definitions": "Type Definitions",
+  "examples": "Examples",
+  "example": "Example",
+  "extends": "Extends",
+  "requires": "Requires"
+}
