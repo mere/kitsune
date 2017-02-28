@@ -210,7 +210,7 @@ function generate(type, title, docs, filename, resolveLinks) {
 
     var docData = {
         type: type,
-        title: title,
+        title: view.i18n(title),
         docs: docs
     };
 
@@ -335,7 +335,7 @@ function buildMemberNav(items, itemHeading, itemsSeen, linktoFn) {
         });
 
         if (itemsNav !== '') {
-            nav += '<h3>' + itemHeading + '</h3><ul>' + itemsNav + '</ul>';
+            nav += '<h3 data-name="'+itemHeading+'">' + view.i18n(itemHeading) + '</h3><ul>' + itemsNav + '</ul>';
         }
     }
 
@@ -365,7 +365,7 @@ function linktoExternal(longName, name) {
  * @return {string} The HTML for the navigation sidebar.
  */
 function buildNav(members) {
-    var nav = '<h2><a href="index.html">Home</a></h2>';
+    var nav = '<h2 class="home"><a href="index.html">Home</a></h2>';
     var seen = {};
     var seenTutorials = {};
 
@@ -393,7 +393,7 @@ function buildNav(members) {
             nav += '<h3>' + linkto('global', 'Global') + '</h3>';
         }
         else {
-            nav += '<h3>Global</h3><ul>' + globalNav + '</ul>';
+            nav += '<h3>'+view.i18n('Global')+'</h3><ul>' + globalNav + '</ul>';
         }
     }
 
@@ -584,6 +584,51 @@ exports.publish = function(taffyData, opts, tutorials) {
     view.htmlsafe = htmlsafe;
     view.outputSourceFiles = outputSourceFiles;
 
+    var partialCore = view.partial.bind(view)
+    view.partial = function(p, data){
+      var override = conf.default.templateFiles &&
+        conf.default.templateFiles[p.match(/^[^.]*/).shift()]
+      var filePath = override?
+          path.getResourcePath(path.dirname(override),
+              path.basename(override) ) : p;
+      return partialCore(filePath, data)
+    }
+
+    /**
+     * localise a term.
+     * It allows the user to specify a `default.i18nFile` in the `config.json`,
+     * pointing to a json file containing all localistions as simple key-value pairs.
+     * @example
+     * // config.js
+     * {
+     *  "default" : {
+     *    "i18nFile" : 'src-docs/locale/en.json'
+     *  }
+     * }
+     * // en.json
+     * {
+     *   "Home": "",
+     *   "static": "(STATIC)"
+     * }
+     * @param  {String} key String to be localised
+     * @return {String} The localised output
+     */
+    var i18n = (key)=>{
+      if (conf.default.i18nFile && !i18n.cache) {
+        let i18nPath = path.getResourcePath(path.dirname(conf.default.i18nFile),
+            path.basename(conf.default.i18nFile) )
+        i18n.cache = JSON.parse(fs.readFileSync(i18nPath, 'utf8'))
+      }
+      if (i18n.cache && i18n.cache[key]!==undefined) return i18n.cache[key]
+      if (i18n.cache && i18n.cache[key.toLowerCase()]!==undefined) return i18n.cache[key.toLowerCase()]
+      if (i18n.default[key]!==undefined) return i18n.default[key]
+      if (i18n.default[key.toLowerCase()]!==undefined) return i18n.default[key.toLowerCase()]
+      return key
+    }
+    i18n.cache = null
+    i18n.default = JSON.parse(fs.readFileSync(path.join(__dirname, 'locale', 'en.json'), 'utf8'))
+    view.i18n = i18n
+
     // once for all
     view.nav = buildNav(members);
     attachModuleSymbols( find({ longname: {left: 'module:'} }), members.modules );
@@ -601,7 +646,7 @@ exports.publish = function(taffyData, opts, tutorials) {
     var files = find({kind: 'file'});
     var packages = find({kind: 'package'});
 
-    generate('', 'Home',
+    generate('', 'home',
         packages.concat(
             [{kind: 'mainpage', readme: opts.readme, longname: (opts.mainpagetitle) ? opts.mainpagetitle : 'Main Page'}]
         ).concat(files),
@@ -650,7 +695,7 @@ exports.publish = function(taffyData, opts, tutorials) {
     // TODO: move the tutorial functions to templateHelper.js
     function generateTutorial(title, tutorial, filename) {
         var tutorialData = {
-            title: title,
+            title: view.i18n(title),
             header: tutorial.title,
             content: tutorial.parse(),
             children: tutorial.children

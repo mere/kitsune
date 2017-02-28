@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+/*@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);*/
 
 * {
   box-sizing: border-box
@@ -106,6 +106,7 @@ tt, code, kbd, samp {
   float: right;
   min-width: 360px;
   width: calc(100% - 250px);
+  min-height: calc(100% - 50px);
 }
 
 header {
@@ -215,7 +216,12 @@ footer {
   display: block;
   padding: 15px;
   font-style: italic;
-  font-size: 90%;
+  font-size: 80%;
+  text-align: center;
+}
+
+footer>span{
+  font-weight: bold;
 }
 
 .ancestors {
