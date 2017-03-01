@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title><?js= title ?> - Documentation</title>
     <?js= this.partial('head.tmpl') ?>
+    <script>hljs && hljs.initHighlightingOnLoad();</script>
 </head>
 <body>
 
@@ -30,7 +31,6 @@
 <br class="clear">
 <?js= this.partial('footer.tmpl') ?>
 
-<script>prettyPrint();</script>
 <script src="scripts/linenumber.js"></script>
 </body>
 </html>

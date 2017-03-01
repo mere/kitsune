@@ -22,5 +22,10 @@
   "bugs": {
     "url": "https://github.com/mere/kitsune/issues"
   },
-  "homepage": "https://github.com/mere/kitsune#readme"
+  "homepage": "https://github.com/mere/kitsune#readme",
+  "dependencies": {
+    "highlight.js": "^9.9.0",
+    "prismjs": "^1.6.0",
+    "taffydb": "^2.7.3"
+  }
 }

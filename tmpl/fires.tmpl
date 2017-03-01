@@ -1,0 +1,12 @@
+<?js
+    var data = obj;
+    var self = this;
+?>
+<?js if (data.fires && fires.length) { ?>
+<dl class="details">
+  <dt class="tag-source">Fires:</dt>
+<?js fires.forEach(function(f) { ?>
+  <dd class="tag-source"><?js= self.linkto(f) ?></dd>
+<?js }); ?>
+</dl>
+<?js } ?>

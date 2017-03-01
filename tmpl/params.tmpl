@@ -92,15 +92,15 @@
             <?js if (params.hasAttributes) {?>
                 <td class="attributes">
                 <?js if (param.optional) { ?>
-                    &lt;optional><br>
+                    <span>optional</span><br>
                 <?js } ?>
 
                 <?js if (param.nullable) { ?>
-                    &lt;nullable><br>
+                    <span>nullable</span><br>
                 <?js } ?>
 
                 <?js if (param.variable) { ?>
-                    &lt;repeatable><br>
+                    <span>repeatable</span><br>
                 <?js } ?>
                 </td>
             <?js } ?>

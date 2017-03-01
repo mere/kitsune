@@ -8,19 +8,18 @@ html, body {
 }
 
 body {
-  color: #4d4e53;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #606c71;
   background-color: white;
   margin: 0 auto;
-  padding: 0 20px;
-
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  padding: 0 0 0 20px;
   font-size: 16px;
   line-height: 160%;
 }
 
 a,
 a:active {
-  color: #0095dd;
+  color: #1e6bb8;
   text-decoration: none;
 }
 
@@ -33,13 +32,14 @@ p, ul, ol, blockquote {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Montserrat', sans-serif;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  color: #000;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #606c71;
   font-weight: 400;
   margin: 0;
+}
+
+h1, h2, h3{
+  color: #159957;
 }
 
 h1 {
@@ -58,6 +58,17 @@ h2 {
   margin: 1.5em 0 .3em;
 }
 
+section.tutorial>header>h2{
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+  line-height: 24px;
+  margin: 15px 0 10px;
+  padding: 0;
+  border-bottom: 1px solid #ddd;
+}
+
 h3 {
   font-size: 24px;
   margin: 1.2em 0 .3em;
@@ -67,6 +78,18 @@ h4 {
   font-size: 18px;
   margin: 1em 0 .2em;
   color: #4d4e53;
+}
+
+h4.name{
+  padding: 1em 4em;
+  margin: 1em -2em;
+  color: #159957;
+  text-align: left;
+  background-color: #ffffff;
+  background-image: linear-gradient(120deg, rgba(21, 87, 153, 0.05), rgba(31, 141, 214, 0.05));
+  font-weight: bold;
+  border:none;
+  box-shadow: none;
 }
 
 h5, .container-overview .subsection-title {
@@ -89,6 +112,10 @@ tt, code, kbd, samp {
   border-radius: 5px;
 }
 
+pre>code, .hljs{
+  font-size: .8em;
+  line-height: 1.5em;
+}
 .class-description {
   font-size: 130%;
   line-height: 140%;
@@ -147,7 +174,7 @@ nav h3 {
   line-height: 24px;
   margin: 15px 0 10px;
   padding: 0;
-  color: #000;
+  color: #159957;
 }
 
 nav ul {
@@ -170,7 +197,7 @@ nav ul a:active {
 
 nav ul a:hover,
 nav ul a:active {
-  color: hsl(200, 100%, 43%);
+  color: #1e6bb8;
   text-decoration: none;
 }
 
@@ -179,7 +206,7 @@ nav > ul {
 }
 
 nav > ul > li > a {
-  color: #000;
+  color: hsl(207, 1%, 60%);
 }
 
 nav ul ul {
@@ -220,6 +247,7 @@ footer {
 
 footer>span{
   font-weight: bold;
+  color: #159957;
 }
 
 .ancestors {
@@ -245,7 +273,13 @@ footer>span{
 }
 
 .type-signature {
-  color: #aaa
+  color: #aaa;
+  font-weight: normal;
+}
+
+.signature{
+  color: #159957;
+  font-weight: normal;
 }
 
 .name, .signature {
@@ -253,7 +287,7 @@ footer>span{
 }
 
 .details {
-  margin-top: 14px;
+  margin: 5px 0;
   border-left: 2px solid #DDD;
   line-height: 30px;
 }
@@ -265,7 +299,14 @@ footer>span{
 }
 
 .details dd {
-   margin-left: 70px
+   margin-left: 120px;
+}
+
+.details dd>a{
+  font-family: 'Montserrat', sans-serif;
+  line-height: 18px;
+  padding: 0;
+  font-size: 12px;
 }
 
 .details ul {
@@ -299,47 +340,6 @@ footer>span{
   margin: 0;
 }
 
-.prettyprint {
-  font-size: 13px;
-  border: 1px solid #ddd;
-  border-radius: 3px;
-  box-shadow: 0 1px 3px hsla(0, 0%, 0%, 0.05);
-  overflow: auto;
-}
-
-.prettyprint.source {
-  width: inherit
-}
-
-.prettyprint code {
-  font-size: 100%;
-  line-height: 18px;
-  display: block;
-  margin: 0 30px;
-  background-color: #fff;
-  color: #4D4E53;
-}
-
-.prettyprint code:empty:before {
-  content: '';
-}
-
-.prettyprint > code {
-  padding: 15px
-}
-
-.prettyprint .linenums code {
-  padding: 0 15px
-}
-
-.prettyprint .linenums li:first-of-type code {
-  padding-top: 15px
-}
-
-.prettyprint code span.line {
-  display: inline-block
-}
-
 .prettyprint.linenums {
   padding-left: 70px;
   -webkit-user-select: none;
@@ -369,10 +369,7 @@ footer>span{
 
 .params, .props {
   border-spacing: 0;
-  border: 1px solid #ddd;
   border-collapse: collapse;
-  border-radius: 3px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
   width: 100%;
   font-size: 14px;
 }
@@ -383,16 +380,27 @@ footer>span{
    font-size: 100%;
 }
 
+.params .type {
+  white-space: normal;
+}
+
 .params td, .params th, .props td, .props th {
    margin: 0px;
    text-align: left;
    vertical-align: top;
-   padding: 10px;
+   padding: 1px 10px;
    display: table-cell;
 }
 
-.params td {
-   border-top: 1px solid #eee
+.attributes>span {
+  color: #4D4E53;
+  font-family: Consolas, Monaco, 'Andale Mono', monospace;
+  font-size: 80%;
+  padding: 1px 5px;
+  border-radius: 5px;
+  background: #f4f4f4;
+  color: #666;
+  margin-right: 2px;
 }
 
 .params thead tr, .props thead tr {

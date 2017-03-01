@@ -182,7 +182,7 @@ function addAttribs(f) {
     var attribs = helper.getAttribs(f);
     var attribsString = buildAttribsString(attribs);
 
-    f.attribs = util.format('<span class="type-signature">%s</span>', attribsString);
+    f.attribs = util.format('<span class="type-signature type-attrib">%s</span>', attribsString);
 }
 
 function shortenPaths(files, commonPrefix) {
@@ -504,7 +504,8 @@ exports.publish = function(taffyData, opts, tutorials) {
             [];
         staticFileFilter = new (require('jsdoc/src/filter')).Filter(conf.default.staticFiles);
         staticFileScanner = new (require('jsdoc/src/scanner')).Scanner();
-
+        // add theme files
+        staticFilePaths.push('node_modules/highlight.js/styles/'+conf.default.theme+'.css')
         staticFilePaths.forEach(function(filePath) {
             var extraStaticFiles = staticFileScanner.scan([filePath], 10, staticFileFilter);
 
