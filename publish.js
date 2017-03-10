@@ -66,10 +66,6 @@ function needsSignature(doclet) {
 function getSignatureAttributes(item) {
     var attributes = [];
 
-    if (item.optional) {
-        attributes.push('opt');
-    }
-
     if (item.nullable === true) {
         attributes.push('nullable');
     }
@@ -86,6 +82,12 @@ function updateItemName(item) {
 
     if (item.variable) {
         itemName = '&hellip;' + itemName;
+    }
+    if (item.defaultvalue) {
+        itemName += '=' + item.defaultvalue
+    }
+    if (item.optional) {
+        itemName = '['+itemName+']'
     }
 
     if (attributes && attributes.length) {

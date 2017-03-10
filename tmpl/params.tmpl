@@ -1,8 +1,23 @@
 <?js
     var params = obj;
+    var paramsDisplay = (
+      env.conf.templates &&
+      env.conf.templates.default &&
+      env.conf.templates.default.paramsDisplay)
+        ? env.conf.templates.default.paramsDisplay
+        : ''
 
     /* sort subparams under their parent params (like opts.classname) */
     var parentParam = null;
+
+    function addCompactParamName(param){
+      if (paramsDisplay === 'compact'){
+        if (param.variable) param.name = '&hellip;' + param.name
+        if (param.defaultvalue) param.name += '='+param.defaultvalue
+        if (param.optional) param.name = '['+param.name+']'
+      }
+    }
+
     params.forEach(function(param, i) {
         var paramRegExp;
 
@@ -26,6 +41,7 @@
         else {
             parentParam = param;
         }
+        addCompactParamName(param)
     });
 
     /* determine if we need extra columns, "attributes" and "default" */
@@ -50,7 +66,7 @@
     });
 ?>
 
-<table class="params">
+<table class="params <?js= paramsDisplay ?>">
     <thead>
     <tr>
         <?js if (params.hasName) {?>
