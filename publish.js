@@ -587,6 +587,44 @@ exports.publish = function(taffyData, opts, tutorials) {
     view.htmlsafe = htmlsafe;
     view.outputSourceFiles = outputSourceFiles;
 
+    /**
+     * replace a tag with custom content
+     * @param  {String} content The text to search in
+     * @param  {[type]} key     name of the tag
+     * @param  {[type]} valF    replacement function
+     * @return {[type]}         the new content
+     * @example
+     * <width>200</width>
+     * content = extractTag(content, width, w =>{ width = w, return 'width:' + w})
+     */
+    view.extractTag = (content, key, valF)=>content.replace(
+      new RegExp(`<${key}>((?!<\/${key}>).|\n)*<\/${key}>`, 'g'),
+      match => {
+
+        let val = match.match(new RegExp(`<${key}>((?:.|\n)*)<\/${key}>`))
+        return valF(val.pop())
+    })
+
+    view.decodeHTMLEntities = function (text) {
+        var entities = [
+            ['amp', '&'],
+            ['apos', '\''],
+            ['#x27', '\''],
+            ['#x2F', '/'],
+            ['#39', '\''],
+            ['#47', '/'],
+            ['lt', '<'],
+            ['gt', '>'],
+            ['nbsp', ' '],
+            ['quot', '"']
+        ];
+
+        for (var i = 0, max = entities.length; i < max; ++i)
+            text = text.replace(new RegExp('&'+entities[i][0]+';', 'g'), entities[i][1]);
+
+        return text;
+    }
+
     var partialCore = view.partial.bind(view)
     view.partial = function(p, data){
       var override = conf.default.templateFiles &&

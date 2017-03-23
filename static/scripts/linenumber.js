@@ -44,8 +44,8 @@
 
 		if (lines > 1) {
 			var l = '<ul>';
-			for (var i = 0; i < lines; i++) {
-				l += '<li id="line'+(i+1)+'">' + (i + 1) + '</li>';
+			for (var i = 1; i < lines+1; i++) {
+				l += '<li class="linenum-item" id="line'+i+'"><a href="#line'+i+'">' + i + '</a></li>';
 			}
       l+= '</ul>'
 
@@ -53,7 +53,13 @@
 			linesPanel.className = 'hljs hljs-line-numbers';
 			linesPanel.style.float = 'left';
 			linesPanel.innerHTML = l;
-
+      document.getElementsByClassName('linenum-item')
+        .forEach(function(e){
+          e.addEventListener("click", function(event){
+            event.preventDefault();
+            document.location.hash=e.id
+          })
+      })
 			parent.insertBefore(linesPanel, element);
       selectActive()
 		}
