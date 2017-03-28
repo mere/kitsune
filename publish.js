@@ -597,13 +597,16 @@ exports.publish = function(taffyData, opts, tutorials) {
      * <width>200</width>
      * content = extractTag(content, width, w =>{ width = w, return 'width:' + w})
      */
-    view.extractTag = (content, key, valF)=>content.replace(
-      new RegExp(`<${key}>((?!<\/${key}>).|\n)*<\/${key}>`, 'g'),
-      match => {
-
-        let val = match.match(new RegExp(`<${key}>((?:.|\n)*)<\/${key}>`))
-        return valF(val.pop())
-    })
+    view.extractTag = (content, key, valF)=>{
+      let str = view.decodeHTMLEntities(content)
+      let term = `[\\n\\s]*<${key}>([\\s\\S]*)<\/${key}>`
+      return str.replace(
+        new RegExp(term, 'g'),
+        match => {
+          let val = match.match(new RegExp(term))
+          return valF(val.pop())
+      })
+    }
 
     view.decodeHTMLEntities = function (text) {
         var entities = [

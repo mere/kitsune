@@ -118,6 +118,7 @@ tt, code, kbd, samp {
 pre>code, .hljs{
   line-height: 1.5em;
   max-width: 500px;
+  border-radius: 0.3rem;
 }
 
 .source .hljs {
