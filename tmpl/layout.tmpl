@@ -13,17 +13,23 @@
 </label>
 <label for="nav-trigger" class="overlay"></label>
 
-<?js= this.partial('header.tmpl') ?>
-<nav>
-    <?js= this.nav ?>
-</nav>
+<div class="page">
+  <header class="page-header">
+    <?js= this.partial('header.tmpl') ?>
+  </header>
+  <div class="page-contents">
+    <nav class="sidebar">
+        <?js= this.nav ?>
+    </nav>
 
-<div id="main">
-    <?js if (title != 'Home') { ?>
-    <h1 class="page-title"><?js= title ?></h1>
-    <?js } ?>
+    <div id="main">
+        <?js if (title != 'Home') { ?>
+        <h1 class="page-title"><?js= title ?></h1>
+        <?js } ?>
 
-    <?js= content ?>
+        <?js= content ?>
+    </div>
+  </div>
 </div>
 
 <br class="clear">

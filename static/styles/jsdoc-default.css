@@ -12,7 +12,7 @@ body {
   color: #606c71;
   background-color: white;
   margin: 0 auto;
-  padding: 0 0 0 20px;
+  padding: 0;
   font-size: 16px;
   line-height: 160%;
   overflow-x: hidden;
@@ -137,10 +137,8 @@ pre>code, .hljs{
 }
 
 #main {
-  float: right;
   min-width: 360px;
-  width: calc(100% - 250px);
-  min-height: calc(100% - 50px);
+  padding: 10px;
 }
 
 header {
@@ -164,17 +162,15 @@ section {
   font-weight: lighter;
 }
 
-nav {
-  float: left;
+nav.sidebar {
+  padding-left:10px;
   display: block;
   width: 250px;
   background: #fff;
   overflow: auto;
-  position: fixed;
-  height: 100%;
 }
 
-nav h3 {
+nav.sidebar h3 {
   margin-top: 12px;
   font-size: 13px;
   text-transform: uppercase;
@@ -186,7 +182,7 @@ nav h3 {
   color: #159957;
 }
 
-nav ul {
+nav.sidebar ul {
   font-family: 'Lucida Grande', 'Lucida Sans Unicode', arial, sans-serif;
   font-size: 100%;
   line-height: 17px;
@@ -204,8 +200,8 @@ h4>a.anchor::before{
 h4:hover>a.anchor::before{
   display: inline-block;
 }
-nav ul a,
-nav ul a:active {
+nav.sidebar ul a,
+nav.sidebar ul a:active {
   font-family: 'Montserrat', sans-serif;
   line-height: 18px;
   padding: 0;
@@ -213,42 +209,42 @@ nav ul a:active {
   font-size: 12px;
 }
 
-nav ul a:hover,
-nav ul a:active {
+nav.sidebar ul a:hover,
+nav.sidebar ul a:active {
   color: #1e6bb8;
   text-decoration: none;
 }
 
-nav > ul {
+nav.sidebar > ul {
   padding: 0 10px;
 }
 
-nav > ul > li > a {
+nav.sidebar > ul > li > a {
   color: hsl(207, 1%, 60%);
 }
 
-nav ul ul {
+nav.sidebar ul ul {
   margin-bottom: 10px
 }
 
-nav ul ul a,
+nav.sidebarul ul a,
 .hljs-line-numbers a {
   color: hsl(207, 1%, 60%);
   border-left: 1px solid hsl(207, 10%, 86%);
 }
 
-nav ul ul a,
-nav ul ul a:active {
+nav.sidebar ul ul a,
+nav.sidebar ul ul a:active {
   padding-left: 20px
 }
 
-nav h2 {
+nav.sidebar h2 {
    font-size: 12px;
    margin: 0;
    padding: 0;
 }
 
-nav > h2 > a {
+nav.sidebar > h2 > a {
    display: block;
    margin: 10px 0 -10px;
    color: hsl(202, 71%, 50%) !important;
@@ -603,8 +599,10 @@ dl.param-type {
   transform: scale(0.75) rotate(45deg);
 }
 
-.nav-trigger:checked ~ nav {
-  left: 0 !important;
+.nav-trigger:checked ~ .page nav {
+  left: 0;
+  position: fixed;
+  top:0
 }
 
 .nav-trigger:checked ~ .overlay {
@@ -656,6 +654,9 @@ dl.param-type {
     right: 0;
     z-index: 2;
   }
+  figure > figcaption {
+    width: 100%;
+  }
 
   #main {
     width: 100%;
@@ -679,9 +680,49 @@ dl.param-type {
   nav {
     display: none;
   }
+}
 
-  #main {
-    float: none;
-    width: 100%;
-  }
+.page-{
+  display: flex;
+  flex-direction: column;
+}
+
+.page-contents{
+  display: flex;
+}
+
+.page-header {
+  padding: 2em 1em 1.5em 1em;
+  color: #fff;
+  text-align: center;
+  background-color: #159957;
+  background-image: linear-gradient(120deg, #155799, #1f8dd6);
+}
+
+.page-header .project-name a {
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.project-name {
+  font-size: 3.25rem;
+  margin: 0;
+}
+
+.project-tagline {
+  margin: 0;
+  font-size: .86rem;
+  font-weight: normal;
+  opacity: 0.7;
+  color: #fff;
+  text-align: center;
+}
+
+.project-version{
+  color: #ffffff;
+  margin: 0;
+  font-size: 1rem;
+}
+.project-name a:hover {
+  text-decoration: none;
 }

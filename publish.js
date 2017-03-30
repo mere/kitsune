@@ -20,7 +20,7 @@ var data;
 var view;
 
 var outdir = path.normalize(env.opts.destination);
-
+env.package = JSON.parse(fs.readFileSync(path.resolve('package.json'), 'UTF-8'))
 function find(spec) {
     return helper.find(data, spec);
 }
