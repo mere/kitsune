@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title><?js= title ?> - Documentation</title>
+    <?js= this.partial('meta.tmpl', title) ?>
     <?js= this.partial('head.tmpl') ?>
+    <script>hljs && hljs.initHighlightingOnLoad();</script>
 </head>
 <body>
 
@@ -12,9 +11,9 @@
 <label for="nav-trigger" class="navicon-button x">
   <div class="navicon"></div>
 </label>
-
 <label for="nav-trigger" class="overlay"></label>
 
+<?js= this.partial('header.tmpl') ?>
 <nav>
     <?js= this.nav ?>
 </nav>
@@ -30,7 +29,6 @@
 <br class="clear">
 <?js= this.partial('footer.tmpl') ?>
 
-<script>prettyPrint();</script>
 <script src="scripts/linenumber.js"></script>
 </body>
 </html>

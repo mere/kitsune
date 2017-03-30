@@ -12,6 +12,12 @@
     <h2><?js= header ?></h2>
 </header>
 
+<?js
+  content = this.extractTag(content, 'example', example=>{
+    let script = example.replace(/<br>/g,'\n')
+    return this.partial('example.tmpl', script)
+  })
+?>
 <article>
     <?js= content ?>
 </article>

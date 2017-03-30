@@ -66,10 +66,6 @@ function needsSignature(doclet) {
 function getSignatureAttributes(item) {
     var attributes = [];
 
-    if (item.optional) {
-        attributes.push('opt');
-    }
-
     if (item.nullable === true) {
         attributes.push('nullable');
     }
@@ -86,6 +82,12 @@ function updateItemName(item) {
 
     if (item.variable) {
         itemName = '&hellip;' + itemName;
+    }
+    if (item.defaultvalue) {
+        itemName += '=' + item.defaultvalue
+    }
+    if (item.optional) {
+        itemName = '['+itemName+']'
     }
 
     if (attributes && attributes.length) {
@@ -182,7 +184,7 @@ function addAttribs(f) {
     var attribs = helper.getAttribs(f);
     var attribsString = buildAttribsString(attribs);
 
-    f.attribs = util.format('<span class="type-signature">%s</span>', attribsString);
+    f.attribs = util.format('<span class="type-signature type-attrib">%s</span>', attribsString);
 }
 
 function shortenPaths(files, commonPrefix) {
@@ -504,7 +506,8 @@ exports.publish = function(taffyData, opts, tutorials) {
             [];
         staticFileFilter = new (require('jsdoc/src/filter')).Filter(conf.default.staticFiles);
         staticFileScanner = new (require('jsdoc/src/scanner')).Scanner();
-
+        // add theme files
+        staticFilePaths.push('node_modules/highlight.js/styles/'+conf.default.theme+'.css')
         staticFilePaths.forEach(function(filePath) {
             var extraStaticFiles = staticFileScanner.scan([filePath], 10, staticFileFilter);
 
@@ -583,6 +586,47 @@ exports.publish = function(taffyData, opts, tutorials) {
     view.tutoriallink = tutoriallink;
     view.htmlsafe = htmlsafe;
     view.outputSourceFiles = outputSourceFiles;
+
+    /**
+     * replace a tag with custom content
+     * @param  {String} content The text to search in
+     * @param  {[type]} key     name of the tag
+     * @param  {[type]} valF    replacement function
+     * @return {[type]}         the new content
+     * @example
+     * <width>200</width>
+     * content = extractTag(content, width, w =>{ width = w, return 'width:' + w})
+     */
+    view.extractTag = (content, key, valF)=>{
+      let str = view.decodeHTMLEntities(content)
+      let term = `[\\n\\s]*<${key}>([\\s\\S]*)<\/${key}>`
+      return str.replace(
+        new RegExp(term, 'g'),
+        match => {
+          let val = match.match(new RegExp(term))
+          return valF(val.pop())
+      })
+    }
+
+    view.decodeHTMLEntities = function (text) {
+        var entities = [
+            ['amp', '&'],
+            ['apos', '\''],
+            ['#x27', '\''],
+            ['#x2F', '/'],
+            ['#39', '\''],
+            ['#47', '/'],
+            ['lt', '<'],
+            ['gt', '>'],
+            ['nbsp', ' '],
+            ['quot', '"']
+        ];
+
+        for (var i = 0, max = entities.length; i < max; ++i)
+            text = text.replace(new RegExp('&'+entities[i][0]+';', 'g'), entities[i][1]);
+
+        return text;
+    }
 
     var partialCore = view.partial.bind(view)
     view.partial = function(p, data){

@@ -8,19 +8,19 @@ html, body {
 }
 
 body {
-  color: #4d4e53;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #606c71;
   background-color: white;
   margin: 0 auto;
-  padding: 0 20px;
-
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  padding: 0 0 0 20px;
   font-size: 16px;
   line-height: 160%;
+  overflow-x: hidden;
 }
 
 a,
 a:active {
-  color: #0095dd;
+  color: #1e6bb8;
   text-decoration: none;
 }
 
@@ -33,13 +33,14 @@ p, ul, ol, blockquote {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Montserrat', sans-serif;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  color: #000;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #606c71;
   font-weight: 400;
   margin: 0;
+}
+
+h1, h2, h3{
+  color: #159957;
 }
 
 h1 {
@@ -58,21 +59,46 @@ h2 {
   margin: 1.5em 0 .3em;
 }
 
+section.tutorial>header>h2{
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+  line-height: 24px;
+  margin: 15px 0 10px;
+  padding: 0;
+  border-bottom: 1px solid #ddd;
+}
+
 h3 {
   font-size: 24px;
   margin: 1.2em 0 .3em;
 }
 
 h4 {
-  font-size: 18px;
+  font-size: 16px;
   margin: 1em 0 .2em;
   color: #4d4e53;
+}
+
+h4.name{
+  padding: 1em 2em;
+  margin: 4em -2em 1em;
+  color: #159957;
+  background-color: #ffffff;
+  background-image: linear-gradient(120deg, rgba(21, 87, 153, 0.05), rgba(31, 141, 214, 0.05));
+  font-weight: bold;
+  border:none;
+  box-shadow: none;
 }
 
 h5, .container-overview .subsection-title {
   font-size: 120%;
   letter-spacing: -0.01em;
   margin: 8px 0 3px 0;
+}
+h5 {
+  font-weight: bold;
 }
 
 h6 {
@@ -87,6 +113,16 @@ tt, code, kbd, samp {
   background: #f4f4f4;
   padding: 1px 5px;
   border-radius: 5px;
+}
+
+pre>code, .hljs{
+  line-height: 1.5em;
+  max-width: 500px;
+  border-radius: 0.3rem;
+}
+
+.source .hljs {
+  max-width: inherit;
 }
 
 .class-description {
@@ -114,7 +150,7 @@ header {
 section {
   display: block;
   background-color: #fff;
-  padding: 0 30px;
+  padding: 0 2em;
 }
 
 .variation {
@@ -147,7 +183,7 @@ nav h3 {
   line-height: 24px;
   margin: 15px 0 10px;
   padding: 0;
-  color: #000;
+  color: #159957;
 }
 
 nav ul {
@@ -159,6 +195,15 @@ nav ul {
   list-style-type: none;
 }
 
+h4>a.anchor::before{
+  content:'#';
+  margin-left: -1em;
+  display:none;
+  position: absolute;
+}
+h4:hover>a.anchor::before{
+  display: inline-block;
+}
 nav ul a,
 nav ul a:active {
   font-family: 'Montserrat', sans-serif;
@@ -170,7 +215,7 @@ nav ul a:active {
 
 nav ul a:hover,
 nav ul a:active {
-  color: hsl(200, 100%, 43%);
+  color: #1e6bb8;
   text-decoration: none;
 }
 
@@ -179,14 +224,15 @@ nav > ul {
 }
 
 nav > ul > li > a {
-  color: #000;
+  color: hsl(207, 1%, 60%);
 }
 
 nav ul ul {
   margin-bottom: 10px
 }
 
-nav ul ul a {
+nav ul ul a,
+.hljs-line-numbers a {
   color: hsl(207, 1%, 60%);
   border-left: 1px solid hsl(207, 10%, 86%);
 }
@@ -220,6 +266,7 @@ footer {
 
 footer>span{
   font-weight: bold;
+  color: #159957;
 }
 
 .ancestors {
@@ -245,7 +292,13 @@ footer>span{
 }
 
 .type-signature {
-  color: #aaa
+  color: #aaa;
+  font-weight: normal;
+}
+
+.signature{
+  color: #159957;
+  font-weight: normal;
 }
 
 .name, .signature {
@@ -253,9 +306,8 @@ footer>span{
 }
 
 .details {
-  margin-top: 14px;
+  margin: 5px 0;
   border-left: 2px solid #DDD;
-  line-height: 30px;
 }
 
 .details dt {
@@ -265,7 +317,14 @@ footer>span{
 }
 
 .details dd {
-   margin-left: 70px
+   margin-left: 120px;
+}
+
+.details dd>a{
+  font-family: 'Montserrat', sans-serif;
+  line-height: 18px;
+  padding: 0;
+  font-size: 12px;
 }
 
 .details ul {
@@ -299,100 +358,118 @@ footer>span{
   margin: 0;
 }
 
-.prettyprint {
-  font-size: 13px;
-  border: 1px solid #ddd;
-  border-radius: 3px;
-  box-shadow: 0 1px 3px hsla(0, 0%, 0%, 0.05);
-  overflow: auto;
+.hljs.hljs-line-numbers {
+    text-align: right;
+    border-right: 1px solid #ccc;
+    color: #999;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    padding-left:0;
+    padding-right:0;
 }
 
-.prettyprint.source {
-  width: inherit
-}
-
-.prettyprint code {
-  font-size: 100%;
-  line-height: 18px;
-  display: block;
-  margin: 0 30px;
-  background-color: #fff;
-  color: #4D4E53;
-}
-
-.prettyprint code:empty:before {
-  content: '';
-}
-
-.prettyprint > code {
-  padding: 15px
-}
-
-.prettyprint .linenums code {
-  padding: 0 15px
-}
-
-.prettyprint .linenums li:first-of-type code {
-  padding-top: 15px
-}
-
-.prettyprint code span.line {
-  display: inline-block
-}
-
-.prettyprint.linenums {
-  padding-left: 70px;
+.linenums ul {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0
 }
 
-.prettyprint.linenums ol {
-   padding-left: 0
+.linenums li{
+  padding: 0 10px;
 }
-
-.prettyprint.linenums li {
-   border-left: 3px #ddd solid
-}
-
-.prettyprint.linenums li.selected, .prettyprint.linenums li.selected * {
-   background-color: lightyellow
-}
-
-.prettyprint.linenums li * {
-   -webkit-user-select: text;
-   -moz-user-select: text;
-   -ms-user-select: text;
-   user-select: text;
+.linenums li.selected{
+  background-color: #159957;
+  color: #ffffff;
 }
 
 .params, .props {
   border-spacing: 0;
-  border: 1px solid #ddd;
   border-collapse: collapse;
-  border-radius: 3px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
   width: 100%;
-  font-size: 14px;
 }
 
-.params .name, .props .name, .name code {
-   color: #4D4E53;
+.params .name, .props .name, .name code, .returns-type code {
+   color: #159957;
    font-family: Consolas, Monaco, 'Andale Mono', monospace;
-   font-size: 100%;
+}
+
+.params .type {
+  white-space: normal;
+}
+
+.params.compact thead{
+  display: none;
 }
 
 .params td, .params th, .props td, .props th {
    margin: 0px;
    text-align: left;
    vertical-align: top;
-   padding: 10px;
-   display: table-cell;
+   padding: 1px 10px;
 }
 
-.params td {
-   border-top: 1px solid #eee
+
+/**
+ * Compact params layout
+ */
+.params.compact{
+  display: block;
+}
+
+.params.compact td{
+  display: block;
+  padding: 1px;
+}
+.params.compact td.name,
+.returns-type {
+  display: inline-block;
+  padding-left: 1em;
+}
+
+.params.compact td.type{
+  display: inline-block;
+  font-family: Consolas, Monaco, 'Andale Mono', monospace;
+  font-size: 12px;
+}
+.params.compact td.description,
+.returns-description{
+  padding-left: 2em;
+  display: inline;
+}
+
+.params.compact td.description>p:first-child,
+.returns-description>p:first-child{
+  display: inline-block;
+}
+.params.compact td.attributes,
+.params.compact td.default{
+  display: none;
+}
+
+.params.compact td.type::before {
+  content:'('
+}
+.params.compact td.type::after {
+  content:')'
+}
+
+.attributes>span {
+  color: #4D4E53;
+  font-family: Consolas, Monaco, 'Andale Mono', monospace;
+  font-size: 80%;
+  padding: 1px 5px;
+  border-radius: 5px;
+  background: #f4f4f4;
+  color: #666;
+  margin-right: 2px;
 }
 
 .params thead tr, .props thead tr {
@@ -432,6 +509,7 @@ dl.param-type {
 .disabled {
   color: #454545
 }
+
 
 /* navicon button */
 .navicon-button {

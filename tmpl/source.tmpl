@@ -3,6 +3,9 @@
 ?>
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code><?js= data.code ?></code></pre>
+            <pre class="source linenums"><code class="hljs js"><?js= data.code ?></code></pre>
         </article>
     </section>
+    <script type="text/javascript">
+      hljs.lineNumbersBlock(d3.select('.source .hljs').node())
+    </script>
