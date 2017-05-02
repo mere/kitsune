@@ -1,6 +1,6 @@
 {
   "name": "kitsune-jsdoc-template",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Fully customisable jsdoc3 Template",
   "main": "publish.js",
   "scripts": {
