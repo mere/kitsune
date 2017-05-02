@@ -1,5 +1,6 @@
 # kitsune-jsdoc-template
 
+[![CircleCI](https://circleci.com/gh/mere/kitsune-jsdoc-template.svg?style=svg&circle-token=2b25198a8e03dee1c5fdcd430d465a03d63fc958)](https://circleci.com/gh/mere/kitsune-jsdoc-template)
 Fully customisable `jsdoc3` template, based on `nijikokun/minami`
 
 ## Dependencies
